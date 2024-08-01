@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +17,18 @@ namespace Tickets
         public double Price
         {
             get { return _Price; }
-            set { _Price = value; }
+            set
+            {
+                if (value > 0)
+                {
+                    _Price = value;
+                }
+                else
+                {
+                    _Price = 0; // Or some sort of error handling here.
+                }
+                
+            }
         }
 
         public string ConcertName
@@ -26,13 +37,15 @@ namespace Tickets
             set { _ConcertName = value; }
 
         }
-        //set property with some logic
         public string Seat
         {
-            get { if (_Seat == null)
+            get
+            {
+                if (_Seat == null)
                     return "No Seat Allocated";
                 else
-                    return _Seat; }
+                    return _Seat;
+            }
             set { _Seat = value; }
         }
         public string ID
@@ -42,12 +55,12 @@ namespace Tickets
         }
         //Constructors
         //
-        public ConcertTicket(int P, string cn, string s, string id )
+        public ConcertTicket(int P, string cn, string s, string id)
         {
-                Price = P;
-                ConcertName = cn;
-                Seat = s;
-                ID = id;
+            Price = P;
+            ConcertName = cn;
+            Seat = s;
+            ID = id;
         }
         public ConcertTicket(int P, string cn, string id)
         {
@@ -57,7 +70,7 @@ namespace Tickets
         }
 
         //Methods
-       public string OutputStatus()
+        public string OutputStatus()
         {
             string output = ConcertName + " : " + String.Format("{0:C}", _Price) + "\nSeat: " + Seat + "\nTicket Holder ID: " + ID + "\n";
             return output;
@@ -69,6 +82,6 @@ namespace Tickets
             return output;
         }
 
- 
+
     }
 }
